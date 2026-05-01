@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zachary D. Speck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Variables ──────────────────────────────────── */
+    :root {
+      --bg:          #070707;
+      --bg-2:        #0C0C0C;
+      --bg-3:        #111111;
+      --border:      #1A1A1A;
+      --border-2:    #242424;
+      --text:        #EDE8DD;
+      --text-sec:    #877E74;
+      --text-muted:  #3E3A35;
+      --gold:        #C9A96E;
+      --gold-dim:    #6B5530;
+      --gold-bright: #E8CC98;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Instrument Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── Noise overlay ──────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Custom Cursor ──────────────────────────────── */
+    .cursor {
+      position: fixed;
+      width: 7px; height: 7px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s, height 0.25s;
+    }
+    .cursor-ring {
+      position: fixed;
+      width: 28px; height: 28px;
+      border: 1px solid var(--gold-dim);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s, height 0.3s, border-color 0.3s;
+    }
+    @media (pointer: coarse) {
+      body { cursor: auto; }
+      .cursor, .cursor-ring { display: none; }
+    }
+
+    /* ── Nav ────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 3rem;
+      transition: background 0.4s, backdrop-filter 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(7, 7, 7, 0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.25rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-sec);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── Hero ───────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem 4rem;
+      overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,169,110,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,169,110,0.025) 1px, transparent 1px);
+      background-size: 64px 64px;
+      pointer-events: none;
+    }
+    .hero-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(201,169,110,0.045) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* ── Tombstone ──────────────────────────────────── */
+    .tombstone-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 620px;
+    }
+    .tombstone-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      overflow: visible;
+      pointer-events: none;
+    }
+    .ts-rect { fill: none; }
+
+    .tombstone {
+      position: relative;
+      padding: 4rem 3.5rem;
+      text-align: center;
+      opacity: 0;
+      animation: ts-appear 0.9s ease 0.2s forwards;
+    }
+    @keyframes ts-appear {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .ts-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.75rem;
+      opacity: 0;
+      animation: fade-up 0.6s ease 0.85s forwards;
+    }
+    .ts-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.6rem, 6.5vw, 4.2rem);
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fade-up 0.6s ease 1.05s forwards;
+    }
+    .ts-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--text-sec);
+      letter-spacing: 0.04em;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fade-up 0.6s ease 1.2s forwards;
+    }
+    .ts-rule {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-dim) 30%, var(--gold-dim) 70%, transparent);
+      margin: 0 0 2.25rem;
+      opacity: 0;
+      animation: fade-up 0.6s ease 1.35s forwards;
+    }
+
+    .ts-placements {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem 2.5rem;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fade-up 0.6s ease 1.5s forwards;
+    }
+    .ts-placement-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+    .ts-placement-label.incoming {
+      color: var(--gold-dim);
+    }
+    .ts-placement-firm {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--text);
+    }
+    .ts-placement-firm.highlight {
+      color: var(--gold-bright);
+    }
+    .ts-placement-role {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 300;
+      color: var(--text-sec);
+      margin-top: 0.2rem;
+    }
+
+    .ts-footer {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.57rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      opacity: 0;
+      animation: fade-up 0.6s ease 1.75s forwards;
+    }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scroll indicator */
+    .scroll-cue {
+      position: absolute;
+      bottom: 2.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fade-up 0.6s ease 2.2s forwards;
+    }
+    .scroll-cue-line {
+      width: 1px; height: 44px;
+      background: linear-gradient(to bottom, var(--gold-dim), transparent);
+      animation: pulse-line 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse-line {
+      0%, 100% { opacity: 0.3; }
+      50%       { opacity: 1; }
+    }
+    .scroll-cue-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.48rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ── Stats Bar ──────────────────────────────────── */
+    .stats-bar {
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 3.5rem 2rem;
+    }
+    .stats-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 1rem 0.5rem;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem;
+      font-weight: 400;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-sec);
+    }
+
+    /* ── Sections ───────────────────────────────────── */
+    .section {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 6.5rem 2rem;
+    }
+    .section-alt {
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .section-alt .section { padding: 6.5rem 2rem; }
+
+    .section-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      color: var(--text);
+      margin-bottom: 3.5rem;
+    }
+
+    /* ── Experience Timeline ────────────────────────── */
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 3rem;
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .exp-item.visible { opacity: 1; transform: translateY(0); }
+
+    .exp-meta {}
+    .exp-period {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+    .exp-location {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.57rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .exp-badge {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.48rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      border: 1px solid var(--gold-dim);
+      padding: 0.2rem 0.5rem;
+      margin-top: 0.7rem;
+    }
+
+    .exp-content {}
+    .exp-firm {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+    .exp-role {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+    }
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .exp-bullets li {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.83rem;
+      font-weight: 300;
+      color: var(--text-sec);
+      line-height: 1.65;
+      padding-left: 1.3rem;
+      position: relative;
+    }
+    .exp-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gold-dim);
+    }
+
+    /* Transaction sub-block */
+    .transaction {
+      margin-top: 1.2rem;
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--gold-dim);
+      background: var(--bg-3);
+    }
+    .txn-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.5rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 0.35rem;
+    }
+    .txn-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--text-sec);
+      margin-bottom: 0.6rem;
+    }
+    .txn-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .txn-bullets li {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.55;
+      padding-left: 1rem;
+      position: relative;
+    }
+    .txn-bullets li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--gold-dim);
+    }
+
+    /* ── Leadership Cards ───────────────────────────── */
+    .leadership-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    .l-card {
+      padding: 2rem 2rem 2.25rem;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      transition: border-color 0.3s, background 0.3s;
+      opacity: 0;
+      transform: translateY(22px);
+    }
+    .l-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.65s ease, transform 0.65s ease, border-color 0.3s, background 0.3s;
+    }
+    .l-card:hover {
+      border-color: var(--gold-dim);
+      background: var(--bg-3);
+    }
+    .l-card-role {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.53rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.65rem;
+    }
+    .l-card-org {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+    .l-card-period {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .l-card-bullets { list-style: none; }
+    .l-card-bullets li {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--text-sec);
+      line-height: 1.65;
+      padding-left: 1.1rem;
+      position: relative;
+      margin-bottom: 0.4rem;
+    }
+    .l-card-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--border-2);
+    }
+
+    /* ── Education ──────────────────────────────────── */
+    .edu-block {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 3rem;
+      padding: 2.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .edu-school {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.1rem;
+      font-weight: 300;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+    .edu-sub {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--text-sec);
+      margin-bottom: 1.25rem;
+    }
+    .award-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+    .award-chip {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.56rem;
+      letter-spacing: 0.1em;
+      color: var(--text-sec);
+      border: 1px solid var(--border);
+      padding: 0.28rem 0.65rem;
+    }
+    .edu-gpa-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 400;
+      color: var(--gold);
+      text-align: right;
+      line-height: 1;
+      margin-bottom: 0.2rem;
+    }
+    .edu-gpa-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    /* ── Skills ─────────────────────────────────────── */
+    .skills-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 4rem;
+    }
+    .skills-col-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 1rem;
+    }
+    .skill-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+    .skill-chip {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: var(--text-sec);
+      border: 1px solid var(--border);
+      padding: 0.32rem 0.75rem;
+      transition: border-color 0.2s, color 0.2s;
+      cursor: default;
+    }
+    .skill-chip:hover {
+      border-color: var(--gold-dim);
+      color: var(--gold);
+    }
+
+    /* ── Footer ─────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 5rem 2rem 3.5rem;
+      text-align: center;
+    }
+    .footer-inner { max-width: 560px; margin: 0 auto; }
+    .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      color: var(--text);
+      margin-bottom: 2.25rem;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .footer-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-sec);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .footer-link:hover { color: var(--gold); }
+    .footer-copy {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+    }
+
+    /* ── Reveal utility ─────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="ring"></div>
+
+<!-- ── Nav ──────────────────────────────────────────── -->
+<nav id="nav">
+  <a href="#" class="nav-logo">ZDS</a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#leadership">Leadership</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── Hero ─────────────────────────────────────────── -->
+<div class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
+  <div class="tombstone-wrap">
+    <svg class="tombstone-svg" id="ts-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <rect class="ts-rect" id="ts-outer" stroke="#6B5530" stroke-width="1"/>
+      <rect class="ts-rect" id="ts-inner" stroke="#2D2216" stroke-width="0.75"/>
+    </svg>
+
+    <div class="tombstone">
+      <div class="ts-eyebrow">Arizona State University &nbsp;·&nbsp; Barrett, The Honors College</div>
+      <div class="ts-name">ZACHARY D. SPECK</div>
+      <div class="ts-sub">Finance &amp; Artificial Intelligence in Business</div>
+      <div class="ts-rule"></div>
+
+      <div class="ts-placements">
+        <div>
+          <div class="ts-placement-label incoming">Incoming &mdash; Summer 2027</div>
+          <div class="ts-placement-firm highlight">MOELIS &amp; CO.</div>
+          <div class="ts-placement-role">Investment Banking &middot; Technology M&amp;A</div>
+        </div>
+        <div>
+          <div class="ts-placement-label incoming">Incoming &mdash; Summer 2026</div>
+          <div class="ts-placement-firm highlight">FTV CAPITAL</div>
+          <div class="ts-placement-role">Growth Equity &middot; $10.2B Fund</div>
+        </div>
+        <div>
+          <div class="ts-placement-label">Current</div>
+          <div class="ts-placement-firm">CAVE CREEK CAPITAL</div>
+          <div class="ts-placement-role">Private Equity &middot; Analyst Intern</div>
+        </div>
+        <div>
+          <div class="ts-placement-label">Prior</div>
+          <div class="ts-placement-firm">COLUMBIA WEST</div>
+          <div class="ts-placement-role">Investment Banking &middot; Summer Analyst</div>
+        </div>
+      </div>
+
+      <div class="ts-rule"></div>
+      <div class="ts-footer">GPA &nbsp;4.00 / 4.00 &nbsp;&nbsp;·&nbsp;&nbsp; Phoenix, AZ &nbsp;&nbsp;·&nbsp;&nbsp; Expected May 2028</div>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <div class="scroll-cue-line"></div>
+    <div class="scroll-cue-label">Scroll</div>
+  </div>
+</div>
+
+<!-- ── Stats ─────────────────────────────────────────── -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item reveal">
+      <div class="stat-num" data-target="4.00" data-dec="2">4.00</div>
+      <div class="stat-label">Cumulative GPA</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num" data-target="25" data-prefix="$" data-suffix="B+">$25B+</div>
+      <div class="stat-label">M&amp;A Volume Touched</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num" data-target="19400" data-suffix="+">19,400+</div>
+      <div class="stat-label">Industry Report Readers</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-num" data-target="30" data-suffix="%">30%</div>
+      <div class="stat-label">Target IRR &mdash; LBO Models</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Experience ────────────────────────────────────── -->
+<div id="experience">
+  <div class="section">
+    <div class="section-tag reveal">Professional Experience</div>
+    <h2 class="section-heading reveal">Deal History</h2>
+
+    <div class="exp-list">
+
+      <!-- Cave Creek -->
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">Feb 2026 &mdash; Present</div>
+          <div class="exp-location">Phoenix, AZ</div>
+          <div class="exp-badge">Current</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-firm">Cave Creek Capital Management</div>
+          <div class="exp-role">Private Equity Analyst Intern</div>
+          <ul class="exp-bullets">
+            <li>Sole analyst driving platform origination for ex-Wall Street partners across equestrian trailers, museum exhibits, and robotics verticals</li>
+            <li>Build LBO models targeting 30% IRR using 5-year hold periods while sensitizing leverage and multiple assumptions</li>
+            <li>Review 20+ inbound CIMs/week and draft investment theses scrutinizing unit economics, moat, and capex intensity</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Columbia West -->
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">May &mdash; Aug 2025</div>
+          <div class="exp-location">Scottsdale, AZ</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-firm">Columbia West Capital</div>
+          <div class="exp-role">Investment Banking Summer Analyst</div>
+          <ul class="exp-bullets">
+            <li>First freshman intern at Health &amp; Wellness-focused boutique whose principals have led $25B+ in M&amp;A and capital raise volume</li>
+            <li>Prepared 56-slide pitch deck for CEO/CFO, using comps to justify $30M valuation at 15.1x EBITDA for plant extracts target</li>
+            <li>Compiled 400+ M&amp;A and equity raise deals for 7+ reports read by 19,400+ professionals, increasing engagement 35%</li>
+          </ul>
+          <div class="transaction">
+            <div class="txn-label">Selected Transaction &mdash; Sell-Side M&amp;A</div>
+            <div class="txn-name">Project Pluto &mdash; Underground Horizontal-Drilling Contractor Serving Hyperscalers</div>
+            <ul class="txn-bullets">
+              <li>Co-authored 22-page deck for $3B public bidder's C-suite, highlighting new high-profile Mag-7 contract</li>
+              <li>Crafted ground-up 2025 P&amp;L from 150 WIP files and pipeline data, enabling margin analysis for due diligence</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ardent -->
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">Dec 2024 &mdash; May 2025</div>
+          <div class="exp-location">Scottsdale, AZ</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-firm">Ardent Advisory Group</div>
+          <div class="exp-role">Investment Banking Analyst Intern</div>
+          <ul class="exp-bullets">
+            <li>Sole freshman intern at carwash-focused M&amp;A boutique closing deals up to ~$1B EV; mentored by former Houlihan Lokey bankers</li>
+            <li>Drafted 60+ page CIM for custom framing business highlighting digital growth opportunity and revised monthly P&amp;L build</li>
+            <li>Produced industry reports sent to 2,000+ readers, analyzing 30+ data points across 30+ designed pages per report</li>
+          </ul>
+          <div class="transaction">
+            <div class="txn-label">Selected Transaction &mdash; Sell-Side M&amp;A</div>
+            <div class="txn-name">Project Comfort &mdash; Precision Laser MedTech</div>
+            <ul class="txn-bullets">
+              <li>Drafted CIM citing white paper-reported 93% effectiveness vs. peers, low S&amp;M intensity, and FDA 510(k) pathway</li>
+              <li>Built 100+ strategic and sponsor buyer universe; spread 15 comps to benchmark valuation and fundamentals</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- AMI -->
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">Jan 2025 &mdash; Present</div>
+          <div class="exp-location">Tempe, AZ</div>
+          <div class="exp-badge">Current</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-firm">Arizona Microcredit Initiative</div>
+          <div class="exp-role">Head of Internal Development</div>
+          <ul class="exp-bullets">
+            <li>Selected for 5% acceptance rate 501(c)(3) nonprofit consulting founders on growth, operations, and capital strategy via $85K fund</li>
+            <li>Led 3-month, 5-person engagement for skincare founder: built $25K grant pipeline, supplier model, and GTM strategy</li>
+            <li>Built financial model and 28-page deck for local candle CEO, projecting $23K sales uplift enabling &lt;1-month payback</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── Leadership ─────────────────────────────────────── -->
+<div class="section-alt" id="leadership">
+  <div class="section">
+    <div class="section-tag reveal">Professional Development</div>
+    <h2 class="section-heading reveal">Leadership</h2>
+
+    <div class="leadership-grid">
+      <div class="l-card">
+        <div class="l-card-role">President</div>
+        <div class="l-card-org">Investment Banking Industry Scholars</div>
+        <div class="l-card-period">May 2025 &mdash; Present &nbsp;·&nbsp; Tempe, AZ</div>
+        <ul class="l-card-bullets">
+          <li>Lead 14-student, <em>Businessweek</em>-featured IB program focused on technical prep and recruiting execution</li>
+          <li>Build 8%-acceptance analyst prep curriculum across modeling, deal discussion, and networking to improve placement</li>
+        </ul>
+      </div>
+
+      <div class="l-card">
+        <div class="l-card-role">Vice President</div>
+        <div class="l-card-org">Applied Value Investing Club</div>
+        <div class="l-card-period">Sep 2024 &mdash; Present &nbsp;·&nbsp; Tempe, AZ</div>
+        <ul class="l-card-bullets">
+          <li>Accepted as 1 of 2 freshmen for 12-member program taught by ex-D.E. Shaw, Citadel, and Schonfeld PMs</li>
+          <li>Built 20-page Veeva long pitch and full operating/valuation model using expert calls and TAM-build to underwrite $187 PT</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Education ──────────────────────────────────────── -->
+<div id="education">
+  <div class="section">
+    <div class="section-tag reveal">Academic Background</div>
+    <h2 class="section-heading reveal">Education</h2>
+
+    <div class="edu-block reveal">
+      <div>
+        <div class="edu-school">Arizona State University</div>
+        <div class="edu-sub">B.S. Finance, Artificial Intelligence in Business &nbsp;·&nbsp; Barrett, The Honors College &nbsp;·&nbsp; Expected May 2028</div>
+        <div class="award-chips">
+          <span class="award-chip">NAMU Scholar — $20,000</span>
+          <span class="award-chip">Fundamental Edge Academy — $4,500</span>
+          <span class="award-chip">ARMLS Scholar — $2,000</span>
+          <span class="award-chip">Boeing Scholar — $1,500</span>
+        </div>
+      </div>
+      <div>
+        <div class="edu-gpa-num">4.00</div>
+        <div class="edu-gpa-label">Cumulative GPA</div>
+      </div>
+    </div>
+
+    <div class="skills-cols">
+      <div class="reveal">
+        <div class="skills-col-label">Technical Skills &amp; Platforms</div>
+        <div class="skill-chips">
+          <span class="skill-chip">Bloomberg Terminal</span>
+          <span class="skill-chip">Bloomberg Market Concepts</span>
+          <span class="skill-chip">CapIQ</span>
+          <span class="skill-chip">Pitchbook</span>
+          <span class="skill-chip">LBO Modeling</span>
+          <span class="skill-chip">Comparable Analysis</span>
+          <span class="skill-chip">DCF / Valuation</span>
+          <span class="skill-chip">Microsoft Suite</span>
+          <span class="skill-chip">Google Suite</span>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="skills-col-label">Interests</div>
+        <div class="skill-chips">
+          <span class="skill-chip">Live Music</span>
+          <span class="skill-chip">Solo Hiking</span>
+          <span class="skill-chip">Vinyl Collecting</span>
+          <span class="skill-chip">Classical Piano</span>
+          <span class="skill-chip">Evidence-based Lifting</span>
+          <span class="skill-chip">Stephen King Novels</span>
+          <span class="skill-chip">Podcasts</span>
+          <span class="skill-chip">NFL</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Footer / Contact ───────────────────────────────── -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div class="footer-name">Zachary D. Speck</div>
+    <div class="footer-links">
+      <a href="mailto:zdspeck@asu.edu" class="footer-link">zdspeck@asu.edu</a>
+      <a href="tel:4802667099" class="footer-link">(480) 266-7099</a>
+      <a href="https://linkedin.com/in/zacharyspeck/" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 Zachary D. Speck &nbsp;&middot;&nbsp; Arizona State University</div>
+  </div>
+</footer>
+
+<script>
+  /* ── Custom Cursor ──────────────────────────────── */
+  const cur  = document.getElementById('cur');
+  const ring = document.getElementById('ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cur.style.left = mx + 'px';
+    cur.style.top  = my + 'px';
+  });
+  (function tick() {
+    rx += (mx - rx) * 0.13;
+    ry += (my - ry) * 0.13;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(tick);
+  })();
+
+  document.querySelectorAll('a, .l-card, .exp-item, .skill-chip').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cur.style.width  = cur.style.height  = '11px';
+      ring.style.width = ring.style.height = '44px';
+      ring.style.borderColor = 'var(--gold)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cur.style.width  = cur.style.height  = '7px';
+      ring.style.width = ring.style.height = '28px';
+      ring.style.borderColor = 'var(--gold-dim)';
+    });
+  });
+
+  /* ── Nav scroll state ───────────────────────────── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  /* ── Tombstone SVG border draw ──────────────────── */
+  function initTombstone() {
+    const svg  = document.getElementById('ts-svg');
+    const wrap = svg.parentElement;
+    const W = wrap.offsetWidth;
+    const H = wrap.offsetHeight;
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+    function setRect(id, x, y, w, h, delay) {
+      const el = document.getElementById(id);
+      el.setAttribute('x', x); el.setAttribute('y', y);
+      el.setAttribute('width', w); el.setAttribute('height', h);
+      const p = 2 * (w + h);
+      el.style.strokeDasharray  = p;
+      el.style.strokeDashoffset = p;
+      el.style.transition = `stroke-dashoffset 2s ease ${delay}s`;
+      requestAnimationFrame(() => { el.style.strokeDashoffset = '0'; });
+    }
+
+    setRect('ts-outer', 2,    2,    W - 4,  H - 4,  0.3);
+    setRect('ts-inner', 11,   11,   W - 22, H - 22, 0.55);
+  }
+  window.addEventListener('load', initTombstone);
+
+  /* ── Intersection Observer reveals ─────────────── */
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal, .exp-item, .l-card').forEach(el => revealObs.observe(el));
+
+  /* ── Stagger leadership cards ───────────────────── */
+  document.querySelectorAll('.l-card').forEach((c, i) => {
+    c.style.transitionDelay = (i * 0.12) + 's';
+  });
+
+  /* ── Animated counters ──────────────────────────── */
+  function runCounter(el) {
+    const target  = parseFloat(el.dataset.target);
+    const dec     = parseInt(el.dataset.dec) || 0;
+    const prefix  = el.dataset.prefix  || '';
+    const suffix  = el.dataset.suffix  || '';
+    const dur     = 1800;
+    const t0      = performance.now();
+
+    (function frame(now) {
+      const p = Math.min((now - t0) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      const v = target * ease;
+      el.textContent = prefix + (target >= 1000 ? Math.floor(v).toLocaleString() : v.toFixed(dec)) + suffix;
+      if (p < 1) requestAnimationFrame(frame);
+    })(t0);
+  }
+
+  const cntObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !e.target.dataset.done) {
+        e.target.dataset.done = '1';
+        runCounter(e.target);
+      }
+    });
+  }, { threshold: 0.6 });
+
+  document.querySelectorAll('[data-target]').forEach(el => cntObs.observe(el));
+</script>
+</body>
+</html>
