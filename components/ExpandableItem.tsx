@@ -23,18 +23,34 @@ export default function ExpandableItem({
           color: 'inherit',
           cursor: 'pointer',
           textAlign: 'left',
+          display: 'inline-flex',
+          alignItems: 'baseline',
+          gap: '0.4em',
         }}
       >
         {label}
+        <span
+          style={{
+            color: 'var(--muted)',
+            fontSize: '0.65em',
+            fontFamily: 'var(--font-mono, monospace)',
+            letterSpacing: '0.02em',
+            userSelect: 'none',
+            lineHeight: 1,
+            position: 'relative',
+            top: '-0.05em',
+          }}
+        >
+          {open ? '−' : '+'}
+        </span>
       </button>
       {open && (
         <div
           style={{
-            marginTop: '0.6rem',
+            marginTop: '0.7rem',
             color: 'var(--muted)',
             fontSize: '0.9em',
             lineHeight: '1.7',
-            maxWidth: '560px',
           }}
         >
           {children}

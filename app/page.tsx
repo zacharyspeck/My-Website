@@ -42,8 +42,8 @@ const CONCERTS = [
   '9/6/25: Negative Approach, Gorilla Biscuits, Circle Jerks',
   '3/17/26: Machine Girl, Show Me the Body, Lustsickpuppy',
   '5/12/26: The Armed, Converge, Poison the Well',
-  '5/22: February, Reversal of Man',
-  '5/23: Portraits of Past',
+  '5/22/26: February, Reversal of Man',
+  '5/23/26: Portraits of Past',
 ]
 
 export default function Home() {
@@ -161,6 +161,19 @@ export default function Home() {
         </ul>
       </section>
 
+      {/* Projects */}
+      <section className="mt-16">
+        <h2 className="font-mono text-xs text-muted uppercase tracking-widest mb-5">Projects</h2>
+        <ul className="list-none p-0 m-0 space-y-2">
+          <li>
+            <a href="https://thegreenroomfm.vercel.app/" target="_blank" rel="noopener noreferrer">
+              The Green Room
+            </a>
+            , a concert finder I built
+          </li>
+        </ul>
+      </section>
+
       {/* Other */}
       <section className="mt-16">
         <h2 className="font-mono text-xs text-muted uppercase tracking-widest mb-5">Other</h2>
@@ -175,15 +188,24 @@ export default function Home() {
             </a>
             {' '}(4&times; Champion)
           </li>
-          <li>Solo hiking</li>
+          <ExpandableItem label="Solo hiking">
+            <div style={{ marginTop: '0.2rem' }}>
+              <img
+                src="/delta-lake.jpg"
+                alt="Delta Lake, the Tetons"
+                style={{ width: '100%', display: 'block', marginBottom: '0.45rem' }}
+              />
+              <span style={{ fontSize: '0.85em' }}>Delta Lake, the Tetons</span>
+            </div>
+          </ExpandableItem>
           <ExpandableItem label="Stephen King novels">
-            <p>
+            <p style={{ margin: 0 }}>
               I&apos;ve read almost his whole catalogue. My favorites are It, The Dark Tower: The Drawing of the Three, and Misery.
             </p>
           </ExpandableItem>
-          <li>Vinyl ($30K)</li>
+          <li>Vinyl Collection ($30K)</li>
           <ExpandableItem label="Live music">
-            <p style={{ marginBottom: '0.6rem' }}>
+            <p style={{ margin: '0 0 0.6rem' }}>
               I&apos;ve seen countless artists. Here are the ones over the years I still remember clearly to this day.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
@@ -217,36 +239,11 @@ export default function Home() {
             </ul>
           </ExpandableItem>
           <ExpandableItem label="Working out">
-            <p>
+            <p style={{ margin: 0 }}>
               I lost 100 pounds in 8 months, mostly to prove to myself that I could. It became my benchmark for what&apos;s possible. Now whenever something feels out of reach, I think back to it.
             </p>
           </ExpandableItem>
           <li>Coffee (ex-barista)</li>
-        </ul>
-      </section>
-
-      {/* Hiking Photo */}
-      <section className="mt-16">
-        <img
-          src="/delta-lake.jpg"
-          alt="Delta Lake, the Tetons"
-          style={{ width: '100%', display: 'block' }}
-        />
-        <p style={{ color: 'var(--muted)', fontSize: '0.8em', marginTop: '0.5rem' }}>
-          Delta Lake, the Tetons
-        </p>
-      </section>
-
-      {/* Projects */}
-      <section className="mt-16">
-        <h2 className="font-mono text-xs text-muted uppercase tracking-widest mb-5">Projects</h2>
-        <ul className="list-none p-0 m-0 space-y-2">
-          <li>
-            <a href="https://thegreenroomfm.vercel.app/" target="_blank" rel="noopener noreferrer">
-              The Green Room
-            </a>
-            , a concert finder I built
-          </li>
         </ul>
       </section>
 

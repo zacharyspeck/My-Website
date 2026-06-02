@@ -93,3 +93,15 @@ a:hover {
 .prose-content strong {
   font-weight: 600;
 }
+
+/* Source links in essays stay body-color — underline signals clickability */
+.prose-content a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--muted);
+}
+
+.prose-content a:hover {
+  text-decoration-color: var(--fg);
+}
