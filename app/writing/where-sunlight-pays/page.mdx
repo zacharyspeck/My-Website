@@ -1,0 +1,143 @@
+---
+title: Where Sunlight Pays
+date: 2026-05-27
+---
+
+export const metadata = {
+  title: 'Where Sunlight Pays | Zachary Speck',
+  description: 'A thesis on orbital energy: where the value will accrue and why most approaches have failed.',
+}
+
+# Where Sunlight Pays
+
+May 27, 2026
+
+---
+
+In 1954, three scientists at Bell Labs built the first silicon solar cell with 6% efficiency. This is the modern solar panel as we know it, and was the first cell efficient enough to be practical for actual electrical applications. The solar panel has revolutionized the electricity industry, with the IEA projecting total renewables share of global electricity moving from 32% in 2024, to 43% by 2030, with solar PV alone accounting for over half of the increase.
+
+There is one big problem though. Solar panels only work when the sun is out. They produce zero output from sunset to sunrise. The average US utility-scale solar PV operates at around only 24% utilization, meaning they only produce a quarter of their theoretical maximum energy if the panel ran at full nameplate capacity 24/7.
+
+Today, the main solution to this problem is cheap lithium-ion batteries, which allows energy to be stored during the daytime and then utilized into the night. However, most modern grid batteries only run for about 4 hours until they are empty, require sizable capital expenditure to build out at scale, and wear out easily over time. Thus, physicists and founders began pondering the following question: what if we can generate solar power in space rather than on Earth? Orbital energy. This would then expand the maximum theoretical power a solar panel could generate, in terms of both duration and intensity. Many startups have begun tackling this opportunity, primarily in 3 different forms, all of which I will be exploring in this essay. When referring to orbital energy, I am defining it as companies whose primary commercial product is delivered energy (to Earth or to other space assets) sourced from orbital sunlight.
+
+Over the past 6 decades that people have tried tackling this problem, no startups have actually monetized a dollar of orbital energy. Why is this the case? And where will the value in orbital energy accrue? In this essay I will answer the first question, and give a thesis on the second.
+
+## A 60-year-old idea that physics loves and economics hates
+
+In 1968, the world of energy changed forever. A Czech-born mechanical engineer had been tinkering with the idea of monetizing orbital energy by generating power in space, then transmitting it back to Earth. At the time, it was a concern that fossil fuels were finite, which was his motivation for innovating in the first place. Peter E. Glaser published "Power from the Sun: Its Future", in *Science*, the flagship peer-reviewed journal of the AAAS.
+
+In his article, he invents the concept of space-based solar power (SBSP), which entails flying a giant solar panels out to space, having them generate power via the sun and then beaming the electricity down to Earth as microwaves, and a ground antenna catches it and plugs it into the grid. This would allow solar power generation to occur without solar panels, even during the nighttime. 24/7 unlimited energy from the sun.
+
+This article single handedly invented a new industry that involved harvesting the sun both during the day and the night: orbital energy. Nearly 60 years later, no physicist has actually debated whether SBSP works or not. It is by all means physically possible. So why hasn't this been implemented? Zero commercial watts have been sold from space to Earth.
+
+You may think that SBSP should be a booming industry at this point, but this couldn't be farther from the truth. Despite 58 years of rapid iteration on the engineering of SBSP, there are three concrete reasons why the practice hasn't materialized yet, and the answer is overwhelmingly economical.
+
+First, it is simply just too expensive. A 2024 NASA study reaches the conclusion that it's simply uneconomical using baseline assumptions, and only achieves a competitive LCOE (Levelized Cost of Electricity) of $0.03–0.08/kWh when you stack five aggressive assumptions simultaneously:
+
+1. $500/kg launch (block-discounted from $100M Starship pricing)
+2. Electric propulsion can drag the satellite from low orbit to geostationary orbit (time-intensive and complicated)
+3. The satellites last 15 years in space without major repair
+4. In-space servicing and debris removal get cheap ($100M servicers and $50M ADR vehicles)
+5. 85% or better manufacturing learning curves
+
+The OTPS report is explicit that no single sensitivity gets you there. You need all of them at once.
+
+Second, terrestrial alternatives are simply just better. $1B buys 100 MW of solar panels on Earth or 100 kW of solar panels in space, a 1000x gap that wipes out the 3–50x advantage from better orbital insolation. Even more importantly, terrestrial solar has been dropping about 10%/year for years, and battery storage is now on a similar trajectory.
+
+There is just not really a private capital structure that can finance a 15–30 year ROI horizon against a substitute that's getting 10% cheaper annually. To put the nail in the coffin, the rectenna used in SBSP would take up the same amount of land area as terrestrial solar of equivalent output.
+
+Lastly, SBSP has zero institutional backing. To cite a direct NSSO finding (p. 25): "SBSP development over the past 30 years has made little progress because it 'falls between the cracks' of currently-defined responsibilities of federal bureaucracies, and has lacked an organizational advocate within the US Government." NASA's charter is exploration, not energy. DoE's charter is energy, not space. SBSP sits in the gap. This is structurally why the technology has been continuously revisited but never sustained as a program.
+
+The most exciting this sector has ever gotten was when during a 2023 study, a group of Caltech students successfully transmitted power wirelessly in space, and beamed detectable power to Earth, which was the first time SBSP had ever actually been done. This is likely why in 2024, Robinhood cofounder Baiju Bhatt founded Aetherflux, a company originally dedicated to laser power beaming SBSP architecture. They actually raised a $50M Series A in 2025, but quickly changed their name to Cowboy Space and have since pivoted to orbital data centers.
+
+If this pivot doesn't show SBSP was yet again found to be uneconomical, I don't know what does. Again, no one is debating the physics. There are just better avenues for making money in orbital energy. Now I want to examine a startup that did take another angle on monetizing orbital energy. Not with SBSP, but with space mirrors.
+
+## A Sequoia-backed startup facing an undeniable physics problem
+
+If batteries aren't the perfect solution to maximizing solar panel utilization, then what is? This is a problem that then 25-year-old Ben Nowack toiled with for hours as he tried to ruthlessly imagine solutions to this problem. An avid thinker and creator, Ben had been making YouTube videos where he displayed makeshift bombs, which ultimately led to him getting an engineering gig at SpaceX where he built rockets. Upon leaving SpaceX, he was feeling more entrepreneurial than ever, so he spent many late nights envisioning how he could impact the world.
+
+Then one day, the stars finally aligned for him. Mylar mirrors. He could fly football-field sized mirrors out to space, to reflect sunlight back down to solar panels on Earth, allowing them to generate energy at night. In his mind, this bypassed every problem that the battery had, as rotating mirrors in low-earth-orbit (LEO) bypass the 4-hour duration problem and these mirrors would simply just utilize existing solar panels and increase their efficiency, bypassing the need for a pricey infrastructure buildout. Ben then immediately founded Reflect Orbital in 2021, which is his startup focused on getting a constellation of these mirror satellites in orbit. Sounds like a great idea right? Sequoia and Lux Capital thought so when funding their $20M Series A in May of 2025. However, there are 3 issues with this approach to solar that will likely impede the business.
+
+First, there lies the very fact that what they are trying to accomplish is not actually physically possible. And it doesn't require a PhD in physics to understand why, but rather a simple understanding of geometry. Their idea is simple: launch mirrors into LEO at about 625 km above Earth, and reflect sunlight onto solar panels when they aren't generating energy during night. However, the sunlight that reflects off of this mirror will be nowhere near the full luminosity of the sun. Let's give a simple analogy to help understand why this idea is improbable, and do some napkin math to hammer the point home.
+
+Let's imagine you are at an NFL game. You are a fan sitting in the stands, and your home team is ahead by 2 points with the opposing team's field goal kicker lining up for a potential game-winning kick. Let's say in one scenario you have a laser pointer. A laser pointer is a point of light, no matter where you shine it, the spot will never dilute. So when you shine it in the kicker's eyes, the full intensity carries over and he ends up missing the game winning kick.
+
+Now let's imagine another scenario where you have a standard flashlight. A flashlight is not a point source of light, it is many different mini beams of light going in different directions that slowly spread out the farther you shine it. Therefore, the luminosity of the light dilutes the farther you shine the flashlight (even the most powerful ones). So when you attempt to shine the flashlight in the kicker's eyes, he barely notices it and kicks the game winning kick.
+
+Let's apply this to the sun now. The sun is not a point source of light. It has an angle of roughly 0.53 degrees, meaning that its intensity gets diluted when it travels to Earth. So think of the sun as a flashlight.
+
+So when you reflect the sun off a flat mirror, the reflection spreads at the same angle: 0.53 degrees. At Reflect's desired altitude of 625 km, that angle projects a circle on the ground of (625 km × tan(0.53°) = 625 × 0.00925) = **5.8 km wide**. Thus, the circle size is set by the sun's angular width and the mirror's altitude. Increasing the size of the mirror will not increase the size of the circle.
+
+Now let's think about the actual brightness of that spot. The mirror catches a certain amount of sunlight. That light gets spread over the 5.8 km spot. Therefore, the brightness of that spot should equal light collected divided by spot area. Spot area should be (5.8 km diameter): π × (2,900)² = 26.4 million m². For a 54-meter mirror (Reflect's planned production satellite), mirror area should equal (54²) = 2,916 m², and assuming sunlight at ground level is ~1,000 W/m² at noon, the collected sunlight is **2,916,000 W**. Therefore, the brightness on the ground will be (2,916,000 / 26,400,000) = **0.11 W/m²**. For comparison, the brightness of midday sun is 1,000 W/m², so **10,000x dimmer than the sun**. This renders the economic value of a single mirror useless.
+
+Herein lies the fundamental problem: brightness scales with mirror area, but spot size is fixed by altitude and the sun's angular width, so you need thousands of co-pointed satellites to deliver useful intensity to a single ground site.
+
+You may be thinking, "why not just launch a bunch of those satellites and point them all at one spot to achieve the full brightness of the sun?" Now onto the second problem: economic feasibility.
+
+Theoretically, can you launch enough satellites to overcome the single-mirror brightness problem? Yes. Is it feasible? No. A separate academic piece calculates that you would need about 3,000 co-pointed 54-m satellites to achieve 20% of midday sun at one site, and 15,000 co-pointed satellites to achieve full midday sun at one site. Using that math, Reflect's stated long-term ambition of 250,000 satellites allows them to power only 16 sites for evening illumination of solar farms. This is their TAM ceiling.
+
+Factoring in current launch costs, the all-in spend per satellite comes out to about $1M. So for 3,000 satellites for one site, Reflect would have to spend **$3 billion in capex** to deliver 20% sun to one solar farm for 3.5 minutes per pass. And at 2 passes/day, that comes out to about **7 minutes/day of partial light**.
+
+If only there was a solution already in place and sizably cheaper. Hate to break it to you, but it already exists: lithium-ion batteries. A 100MW / 400MWh utility-scale battery at $115/MWh = $160 million capex. It dispatches 100MW for 4 full hours every evening at peak prices, and the battery cost curve continues to fall. So solar farms have two choices: $3B for 7 minutes/day of partial sun on one farm, vs. $160M for 4 hours/day of full dispatch. Battery wins by 20× on capex and by 30× on delivered energy. Now we have established that orbital reflectors are physically and economically impossible as an industry today, you may think this argument is wrapped. It gets worse.
+
+Reflect's plan has a stack of other problems on top of the main one: their giant mirror-sails get dragged down by Earth's atmosphere in months, most of their flight path is over empty ocean with no paying customers, and clouds can block the beam anyway. The mirrors are also bright enough to blind anyone looking through binoculars, would wipe out most ground-based astronomy, and create so much space debris that a single collision could trigger a chain reaction wrecking other satellites.
+
+To put the nail in the coffin, regulators are already lining up to fight them, Ben Nowack's last startup never shipped a product, and their $20M Series A indicates the size of round investors write when they want proof before the real check, not the size you raise to actually build a constellation.
+
+Faced with all these problems, Nowack realized that his initial use case for orbital reflectors would not work. This is why on recent podcast and interview appearances, he is flirting with the idea of monetizing sunlight during the night for ad-hoc premium services (think military deployment, sports lighting, search teams, etc.). There are a whole other myriad of problems with this use case that I won't go into, the biggest of which is that there is too small a TAM to justify an infrastructure buildout. Point being, Reflect has struck out.
+
+## The startup winning by not beaming to Earth
+
+We have examined two failures in the orbital energy space, but you may be asking: are there any winners? It turns out surprisingly, that an under-the-radar startup may have just captured the most favorable economic position out of any orbital space company in the world. Lo and behold, the true sector winner in my eyes: Star Catcher.
+
+Differing from the previous two strategies we talked about, Star Catcher generates power in space via power grids, and keeps it in space. Rather than trying to solve the headache of how to monetize solar and beam it back down to Earth, they just beam it to other satellites that need the power at a cheap price, like how you would charge a phone that is low on battery. Whereas the previous two sectors tussled with physical impedances and political headaches, Star Catcher has managed to sidestep these two problems entirely.
+
+Satellites in LEO are powered by solar panels, and one-third of the time their path is completely shrouded in darkness being out of the sun's reach. Most satellites' power limit is 1,500 W, which is about equivalent to the gaming computer you have at home. Pretty embarrassing. Star Catcher founder and CEO, Andrew Rush, describes it like camping: "Right now in space everybody basically goes on camping trips. You bring your solar arrays with you. When you see the sun you can power yourself up. When you don't see the sun, you have to live off of batteries."
+
+This is inefficient given that what a lot of these satellite operators want to perform will require an enormous amount of energy backing: orbital data centers, cell phone towers in space, SAR, remote sensing, EP-heavy maneuvering satellites, in-space manufacturing and commercial space stations. Star Catcher is plugging the exact bottleneck that a lot of these startups will need to even power their business in the first place, and they are doing so at a favorable price.
+
+The best part about Star Catcher is that they are cheap. The biggest hypothetical competition to Star Catcher is simply the satellite operators building power grids themselves and retrofitting their own buses. However, this is too expensive. A 2 kW satellite bus costs about $5–6 million, and a 20 kW satellite bus costs $20–50 million. So upgrading to 10x the power means 10x the cost, which is not linear scaling.
+
+The alternative is that you can just pay Star Catcher for 10x the power without any retrofit at all, bypassing the expensive cost, engineering headache, and time cost that simply rebuilding your satellite would take. You can just go to one of Star Catcher's "stations", and refill on power, just as if you would take your car to a gas station for a refill.
+
+Another potential concern to address with Star Catcher is something called the "terminator orbit". This sun-synchronous orbit follows the line between day and night around Earth, so the satellite is always in sunlight. Every orbital data center startup wants to fly there, so they aren't using batteries 33% of the time they are receiving sunlight. It is the only place in LEO with continuous solar power.
+
+However, this is a narrow lane and will get crowded quickly. And this is the beauty of Star Catcher's power grids: if their power grids existed first, customers would put their compute in convenient orbits and buy power from the grid, not all crowd into the one sunlit orbit. Star Catcher's bet is that they will be ready before the terminator orbit gets saturated, at which point the rest of LEO opens up as buildable territory.
+
+And here is the structural reason Star Catcher's position is durable: their moat is structural switching cost reinforced by capex asymmetry. Once a customer designs their satellite assuming external power is available, the bus shrinks, the arrays shrink, the battery shrinks, and the entire mission architecture gets built around the grid. Switching off Star Catcher then means redesigning the satellite, which is actually the same dynamic that made AWS sticky once workloads went cloud-native.
+
+The two obvious threats both hit walls. A customer self-building their own bus has to swallow a $20–50M one-time retrofit per satellite (vs. paying Star Catcher a fraction of that per year) plus build ground ops, pointing systems, and regulatory approvals from scratch. And Cowboy Space's pivot to orbital data centers actually turns them into a customer rather than a competitor, as building power-beaming infrastructure on top of building a space-based data center is two hard problems instead of one.
+
+The chicken-and-egg dynamic flips into a moat the moment the grid exists: whoever builds first sets the pricing and integration standards every downstream customer designs around. And the demand tailwind is the largest one in the market: every incremental dollar of AI compute that hits Earth's grid constraints pushes the orbital data center thesis closer to reality, and Star Catcher is the toll road every one of those workloads has to cross. This is why I would put my money on Star Catcher as a VC.
+
+It gets better for a lot of different reasons, but I will focus on a select few that are relevant to the Series B investment case. Whereas Reflect Orbital had the problem of an untested founder, Andrew Rush has actually flown hardware to orbit, which almost nobody else in this category can claim. Rush ran Made In Space, put the first 3D printer on the ISS, sold it to Redwire, and took it public. Compare that to Reflect's Ben Nowack (no flight heritage) or the dozens of SBSP startups that have never delivered hardware. Execution risk in space-tech is mostly founder risk, and Rush has the credentials.
+
+From a TAM standpoint, Star Catcher already has a $60M contracted backlog, which is practically unheard of for a post-Series A deep-tech. This signals the massive market they are building for, and this entry point gives them great runway into what I think will be a knockout Series B. Finally, there is no physics hindrance or political headache to deal with in this industry. SBSP and orbital reflectors were both trying to get power from space to Earth. Star Catcher is keeping it in space, meaning that what they are doing is a lot more feasible and there is essentially zero backlash from the space community given that this doesn't really impact anything material on Earth.
+
+When combining all of these factors, I believe this may be the single most exciting bet in orbital energy. In an industry with so many losers, I think this will be the winner. With a Series B imminent in the next 24–36 months, I am excited to see how this will pan out. I have not seen too much buzz around this trend, so now may be a better time to buy in than ever. And if you are thinking about space-to-space power beaming with as much optimism as I am, I would love to talk to you.
+
+## A future to be excited, not paralyzed by
+
+After reading all of this, you may be wondering: with all the risks at play, why should I be excited about investing in orbital energy when I can put my money in a safer industry? The reason I am spending so much time writing about this sector is that I believe it has the potential to become one of the biggest markets humanity has ever seen.
+
+Let's think about SpaceX for a second. PhDs have criticized SpaceX for a decade, arguing that reusable rockets were economically impossible. SpaceX has now landed boosters 600+ times, made reuse the industry default, dropped launch costs 10x, and turned Starlink into a multi-billion-dollar revenue business. Elon Musk willed what he wanted into reality. As of writing this, SpaceX has just filed their S-1 which will target $1.5–2T of new public market space exposure. Just as Steve Jobs' mind-bending "reality distortion field" allowed him to bend the laws of reality, the orbital energy infrastructure buildout could very well follow the exact same narrative. The most innovative and hard-working founders of our generation will try to will what they want into existence, and SpaceX may be the bellwether for orbital companies.
+
+Over the past 20 years, there have been 3 major investment narratives:
+
+1. **Internet (1995–2010):** Took something physical (retail, media, communication) and moved it to a cheaper, faster substrate.
+2. **Cloud (2010–2020):** Took computing infrastructure and centralized it.
+3. **AI (2020-now):** Took intelligence itself and made it a service.
+
+I have conviction that orbital infrastructure has potential to be the 4th. The base case is already a real business. By 2030, there will be 10,000+ LEO satellites, of which 2,000–3,000 are the power-hungry classes Star Catcher targets (SAR, direct-to-device comms). At $1–3M/yr per satellite (well below the $4–10M/yr cost of retrofitting the satellite), that's a $2–9B/yr near-term market.
+
+The orbital data center upside is where it gets large, with Bezos publicly forecasting gigawatt-scale orbital DCs within 10–20 years, and a single 1 GW cluster representing $876M/yr in power demand at terrestrial industrial rates (1 GW × 8,760 hr × $0.10/kWh = $876M). Adding on realistic defense, commercial station, and in-space manufacturing demand on top, you're at a $10–20B/yr TAM by 2040, which is enough to make Star Catcher a $50–100B company at maturity.
+
+The 4th-wave outcome is the free option on top, and if heavy industry actually moves to orbit over the next 30–50 years, orbital energy will become the equivalent of the terrestrial electric utility industry ($2–3T globally per year), and Star Catcher is the AWS of that world. Even though this may be the case, no one knows if this is an industry yet. But to me, the ambiguity makes it all the better to invest right now and make an outsized return for a risk no one else is willing to take.
+
+When thinking about the 3 big investment trends of the past two decades, the next leg of all three is escaping Earth's constraints: power, land, cooling, regulation, latency. Every one of those bottlenecks gets worse on Earth and disappears in space. AI is creating power demand at a pace the terrestrial grid cannot serve. This is not speculative. Utilities are publicly saying they cannot connect new data centers for years.
+
+Power is the universal input. Every other space business (compute, comms, imaging, manufacturing, mining, defense, tourism) is bottlenecked by it. This is why I believe companies like Star Catcher, who sit at the exact intersection of the two largest economic trends of the next 20 years (AI infrastructure expansion and space industrialization), can make a 10–100x return potential over 15 years. And with fierce geopolitical competition coming from the likes of China and company, you can even envision the second coming of a global space race happening in the next couple of decades.
+
+I am not denying the risk at hand. Timing is never what you want it to be in deep tech. Iridium had the right idea 20 years too early and went bankrupt. Star Catcher could be early if orbital data centers slip by 5+ years. However, I will end this with a saying I believe is underlying this industry:
+
+***The pessimists get to be right, and the optimists get to be rich.***
