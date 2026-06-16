@@ -74,7 +74,7 @@ export default function Home() {
       <section>
         <h1 className="font-serif text-3xl font-normal mb-5 text-fg">Zachary Speck</h1>
         <p>
-          I&apos;m interested in everything technology, and I spend my days and nights learning things, about the world and about myself, and building stuff.
+          My name is Zach. I love technology, finance, and the space where the two meet. Right now I&apos;m reading, learning, and meeting as many people as I can, because life is too short not to spend it making an impact on the world.
         </p>
       </section>
 
@@ -83,13 +83,20 @@ export default function Home() {
         <h2 className="font-mono text-xs text-muted uppercase tracking-widest mb-5">Now</h2>
         <ul className="list-none p-0 m-0 space-y-2">
           <li>
-            Incoming Summer 2027 Investment Banking Analyst at{' '}
+            Incoming Investment Banking Summer Analyst at{' '}
             <a href="https://www.moelis.com/" target="_blank" rel="noopener noreferrer">
               Moelis &amp; Company
             </a>
           </li>
           <li>
-            Growth Equity Analyst at{' '}
+            Growth &amp; Sales at{' '}
+            <a href="https://www.greenboard.com" target="_blank" rel="noopener noreferrer">
+              Greenboard
+            </a>
+            {' '}(YC, General Catalyst backed)
+          </li>
+          <li>
+            Growth Equity at{' '}
             <a href="https://www.ftvcapital.com/" target="_blank" rel="noopener noreferrer">
               FTV Capital
             </a>
@@ -102,41 +109,9 @@ export default function Home() {
             at ASU
           </li>
           <li>
-            Head of Internal Development at the{' '}
+            Supporting founders at the{' '}
             <a href="https://www.azmicrocredit.org/" target="_blank" rel="noopener noreferrer">
               Arizona Microcredit Initiative
-            </a>
-          </li>
-          <li>
-            Vice President of the{' '}
-            <a href="https://www.avicasu.com/" target="_blank" rel="noopener noreferrer">
-              Applied Value Investing Club
-            </a>{' '}
-            at ASU
-          </li>
-        </ul>
-      </section>
-
-      {/* Previously */}
-      <section className="mt-16">
-        <h2 className="font-mono text-xs text-muted uppercase tracking-widest mb-5">Previously</h2>
-        <ul className="list-none p-0 m-0 space-y-2">
-          <li>
-            Private Equity Analyst Intern at{' '}
-            <a href="https://www.cavecreekcapital.com/" target="_blank" rel="noopener noreferrer">
-              Cave Creek Capital Management
-            </a>
-          </li>
-          <li>
-            Investment Banking Summer Analyst at{' '}
-            <a href="https://www.columbiawestcap.com/" target="_blank" rel="noopener noreferrer">
-              Columbia West Capital
-            </a>
-          </li>
-          <li>
-            Investment Banking Analyst Intern at{' '}
-            <a href="https://ardentadvisorygroup.com/" target="_blank" rel="noopener noreferrer">
-              Ardent Advisory Group
             </a>
           </li>
         </ul>
@@ -213,30 +188,6 @@ export default function Home() {
                 <span key={entry}>{entry}</span>
               ))}
             </div>
-          </ExpandableItem>
-          <ExpandableItem label="Podcasts">
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-              <li>
-                <a href="https://www.thetwentyminutevc.com/" target="_blank" rel="noopener noreferrer">
-                  20VC
-                </a>
-              </li>
-              <li>
-                <a href="https://www.joincolossus.com/shows/invest-like-the-best" target="_blank" rel="noopener noreferrer">
-                  Invest Like the Best
-                </a>
-              </li>
-              <li>
-                <a href="https://www.founderspodcast.com/" target="_blank" rel="noopener noreferrer">
-                  Founders (David Senra)
-                </a>
-              </li>
-              <li>
-                <a href="https://jocko.com/podcast/" target="_blank" rel="noopener noreferrer">
-                  Jocko Podcast (Jocko Willink)
-                </a>
-              </li>
-            </ul>
           </ExpandableItem>
           <ExpandableItem label="Working out">
             <p style={{ margin: 0 }}>
