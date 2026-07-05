@@ -240,14 +240,14 @@ function BarChart({
 }
 
 const SEED_NOTE =
-  'Bars = mean of 3 seeds; whiskers = ±1 sample standard deviation (ddof=1). Baseline = single untrained run: outlined bar, no whisker. Sealed OOD exam = 100 easy + 100 hard items per task.'
+  'Bars show the mean of 3 seeds. Whiskers show ±1 sample standard deviation with ddof=1. The baseline is a single untrained run drawn as an outlined bar with no whisker. The sealed OOD exam has 100 easy and 100 hard items per task.'
 
 // ---------- V3 ----------
 
 export function TaskAResultsFigure() {
   return (
     <Fig
-      title="Task A (deal-math). Sealed-exam score by training condition"
+      title="Task A is deal-math. The chart shows sealed-exam scores by training condition."
       caption={
         <>
           {SEED_NOTE} The hard band stays flat in every condition. Task A&apos;s hard questions sit
@@ -271,11 +271,11 @@ export function TaskAResultsFigure() {
 export function TaskBResultsFigure() {
   return (
     <Fig
-      title="Task B (deal-extraction). Sealed-exam score by training condition"
+      title="Task B is deal-extraction. The chart shows sealed-exam scores by training condition."
       caption={
         <>
-          {SEED_NOTE} Metric: all-5-exact %. The hard band jumps only when hard questions enter
-          training, and strict vs. loose grading barely changes it.
+          {SEED_NOTE} The metric is all-5-exact %. The hard band jumps only when hard questions
+          enter training, and strict versus loose grading barely changes it.
         </>
       }
     >
@@ -295,12 +295,12 @@ export function TaskBResultsFigure() {
 export function PassAtKFigure() {
   return (
     <Fig
-      title="pass@k; best-of-4, k=4; all-5-exact for Task B; on the 100 hard-band items"
+      title="pass@k on the 100 hard-band items. k=4, so each bar is a best-of-4 score. Task B uses its all-5-exact variant."
       caption={
         <>
-          {SEED_NOTE} Task A stays in the mid-to-high teens everywhere; Task B moves only when hard
-          questions enter training. pass@1 and pass@4 rise together where the skill is reachable;
-          no diversity collapse.
+          {SEED_NOTE} Task A stays in the mid-to-high teens everywhere. Task B moves only when hard
+          questions enter training. pass@1 and pass@4 rise together where the skill is reachable,
+          so there is no diversity collapse.
         </>
       }
     >
@@ -392,8 +392,8 @@ function HArrow({ y, x1, x2 }: { y: number; x1: number; x2: number }) {
 export function LandscapeFigure() {
   return (
     <Fig
-      title="The lay of the land. Machine learning's subdivisions, and where RLVR sits"
-      caption="Top: the three classic subdivisions of machine learning. Bottom: the frontier-model training pipeline; pre-training, then the post-training chain (SFT, then RLHF/RLAIF, then RLVR), with RL environment companies supplying the environments RLVR trains in."
+      title="The lay of the land. This diagram shows machine learning's subdivisions and where RLVR sits."
+      caption="The top panel shows the three classic subdivisions of machine learning. The bottom panel shows the frontier-model training pipeline. Pre-training comes first, then the post-training chain of SFT, then RLHF or RLAIF, then RLVR. RL environment companies supply the environments RLVR trains in."
     >
       <svg
         viewBox="0 0 420 496"
@@ -451,8 +451,8 @@ export function StudyDesignFigure() {
   ]
   return (
     <Fig
-      title="Study design. One model, four training recipes, one sealed exam"
-      caption="4 students, 4 homeworks, same exam. The same base model is copied 4 times and trained 4 ways. Reward dial (loose / strict) × task dial (easy-only / easy+hard), 3 seeds each; then every student takes the same sealed out-of-distribution final exam."
+      title="Study design. One model is trained four ways and takes one sealed exam."
+      caption="4 students, 4 homeworks, same exam. The same base model is copied 4 times and trained 4 ways. The reward dial is loose or strict and the task dial is easy-only or easy+hard, giving the 2×2 grid with 3 seeds per cell. Every student then takes the same sealed out-of-distribution final exam."
     >
       <svg
         viewBox="0 0 420 400"
@@ -506,8 +506,8 @@ export function StudyDesignFigure() {
           )
         })}
 
-        <VArrow x={210} y1={264} y2={326} />
-        <text x={222} y={300} fontFamily={MONO} fontSize={12} fill={MUTED}>
+        <VArrow x={253} y1={264} y2={326} />
+        <text x={265} y={300} fontFamily={MONO} fontSize={12} fill={MUTED}>
           all 4 students
         </text>
         <Box x={95} yy={330} w={230} h={46} lines={['one sealed OOD exam']} highlight />

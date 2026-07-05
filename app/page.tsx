@@ -173,12 +173,6 @@ export default function Home() {
               <span style={{ fontSize: '0.85em' }}>Delta Lake, the Tetons</span>
             </div>
           </ExpandableItem>
-          <ExpandableItem label="Stephen King novels">
-            <p style={{ margin: 0 }}>
-              I&apos;ve read almost his whole catalogue. My favorites are It, The Dark Tower: The Drawing of the Three, and Misery.
-            </p>
-          </ExpandableItem>
-          <li>Vinyl Collection ($30K)</li>
           <ExpandableItem label="Live music">
             <p style={{ margin: '0 0 0.6rem' }}>
               I&apos;ve seen countless artists. Here are the ones over the years I still remember clearly to this day.
@@ -194,7 +188,6 @@ export default function Home() {
               I lost 100 pounds in 8 months, mostly to prove to myself that I could. It became my benchmark for what&apos;s possible. Now whenever something feels out of reach, I think back to it.
             </p>
           </ExpandableItem>
-          <li>Coffee (ex-barista)</li>
         </ul>
       </section>
 
@@ -211,14 +204,6 @@ export default function Home() {
             rel="noopener noreferrer"
           >
             LinkedIn
-          </a>
-          {' · '}
-          <a
-            href="https://substack.com/@zacharyspeck"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Substack
           </a>
           {' · '}
           <a

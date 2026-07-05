@@ -43,3 +43,19 @@ Files touched (complete list):
 5. **Prime Intellect environment links**: Zach chose option (a) — a small muted mono line under the byline, above the divider: "Published environments: vc-deal-math · vc-deal-extraction", both opening in new tabs. The inline parenthetical (option b) was rejected; prose untouched. Both URLs verified resolving (HTTP 200). The verbatim check now explicitly excludes this one approved line.
 
 Polish files touched: `app/globals.css`, `tailwind.config.ts`, `app/writing/layout.tsx`, `app/writing/the-bottleneck-to-the-bottleneck/figures.tsx`, `implementation-notes.md`.
+
+---
+
+# Cosmetic pass (branch cosmetic-pass)
+
+1. **Title orphan fixed with `text-wrap: balance`** on `.prose-content h1` (globals.css). Title text unchanged; the browser now balances the two lines. Older browsers that lack support simply keep the previous wrapping.
+
+2. **Figure titles/captions rewritten as plain period-only sentences** (no parentheses, colons, semicolons, or em dashes in rendered caption/title text; ± × = % kept where they state values). NOTE, deliberate conflict resolution: the pass@k title previously carried the originally-required exact phrase "best-of-4, k=4; all-5-exact for Task B; on the 100 hard-band items", which contains semicolons. The newer no-semicolon instruction was applied instead; every fact (k=4, best-of-4, all-5-exact for Task B, 100 hard-band items) is preserved in sentence form. In-chart axis/tick labels (e.g. "(untrained)", "strict exact-match %") are chart labels, not captions, and were left alone.
+
+3. **Study-design arrow recentered**: the arrow into the exam box now descends at x=253, the horizontal center of the 2×2 grid (grid spans x=96 to x=410). Student boxes and exam box untouched.
+
+4. **Homepage removals**: Substack link removed from the footer (footer is now Twitter · LinkedIn · GitHub · Email). From the Other section: "Stephen King novels" (expandable item), "Vinyl Collection ($30K)", and "Coffee (ex-barista)" removed; Rainbow Six Siege, Solo hiking, Live music, Working out kept. Substack existed nowhere else in the codebase (grepped).
+
+Re-verified after all changes: build passes; rendered captions contain no forbidden punctuation; all 30 chart value labels still exactly match the locked data; prose verbatim check PASS; 21→21 links PASS.
+
+Cosmetic files touched: `app/globals.css`, `app/page.tsx`, `app/writing/the-bottleneck-to-the-bottleneck/figures.tsx`, `implementation-notes.md`.

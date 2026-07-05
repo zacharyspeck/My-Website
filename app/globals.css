@@ -50,6 +50,7 @@ a:hover {
   font-weight: 400;
   margin-bottom: 0.5rem;
   line-height: 1.3;
+  text-wrap: balance; /* avoid a single orphaned word on the last line */
 }
 
 .prose-content h2 {
