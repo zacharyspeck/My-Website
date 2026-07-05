@@ -73,3 +73,5 @@ Judgment calls, conservative and logged:
 4. **Placement (approved by Zach)**: immediately after the "Looking at Task B, …" paragraph and before the "As I previously touched on, I measured two other KPIs…" paragraph. Only the figure reference and its import were added to page.mdx; prose untouched.
 
 Verified with the preview insertion: build passes; other figures' 30 value labels byte-identical; prose verbatim check PASS; 21→21 links PASS; caption punctuation rules hold and all required caption sentences present.
+
+**Date change (Zach's request, 2026-07-05):** post date moved from July 8th to July 5th, 2026 — frontmatter (`2026-07-05T12:00:00`, noon-UTC to keep the timezone workaround) and the visible date line. The source doc still says "July 8th, 2026", so the verbatim check now reports exactly one expected diff, the approved 8th→5th change. The "July 8" dates in the King Crimson essay are Fripp's 1974 diary entries and were not touched.
