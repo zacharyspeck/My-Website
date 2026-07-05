@@ -59,3 +59,17 @@ Polish files touched: `app/globals.css`, `tailwind.config.ts`, `app/writing/layo
 Re-verified after all changes: build passes; rendered captions contain no forbidden punctuation; all 30 chart value labels still exactly match the locked data; prose verbatim check PASS; 21→21 links PASS.
 
 Cosmetic files touched: `app/globals.css`, `app/page.tsx`, `app/writing/the-bottleneck-to-the-bottleneck/figures.tsx`, `implementation-notes.md`.
+
+---
+
+# Per-field figure (branch add-fields-figure)
+
+New component `TaskBFieldsFigure` in `figures.tsx` — Task B, hard band, per-field strict % for company, founders, valuation, round, raise. Locked data (research repo commit 106da8c) transcribed verbatim; verified by decoding the built SVG's bar geometry back into values and matching all 25 against the locked table.
+
+Judgment calls, conservative and logged:
+1. **Display order within each field group**: baseline, then the two easy-only conditions, then the two easy+hard conditions (the locked list order is baseline / strict·easy / strict·easy+hard / loose·easy / loose·easy+hard). Values untouched; ordering only, so the task-dial lift reads side by side.
+2. **No per-bar numeric labels**: 25 bars at this width cannot carry the sibling charts' value labels without overlapping; the chart reads by gridlines, whiskers, and legend instead. Exact numbers live in the aria-label for screen readers.
+3. **Colors**: easy-only pair in the muted-gray family (solid and 45% opacity), easy+hard pair in the link-blue family (solid and 45%), baseline dashed fg outline with no whisker. Whiskers only where std > 0 (company row and the founders strict·easy+hard cell have std 0.0 and correctly get none).
+4. **Placement (pending approval)**: proposed immediately after the "Looking at Task B, …" paragraph and before the "As I previously touched on, I measured two other KPIs…" paragraph. The insertion currently sits uncommitted in page.mdx as a rendered preview.
+
+Verified with the preview insertion: build passes; other figures' 30 value labels byte-identical; prose verbatim check PASS; 21→21 links PASS; caption punctuation rules hold and all required caption sentences present.

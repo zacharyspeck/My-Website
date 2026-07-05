@@ -319,6 +319,235 @@ export function PassAtKFigure() {
 // BarChart colors series a=LINK, b=FG; for V5 Task A is series a. LINK for A and FG for B keeps
 // contrast in both themes, so the shared component is used as-is.
 
+// ---------- V6: Task B per-field breakdown (hard band) ----------
+
+// Task B, HARD band, per-field strict % (locked data, research repo commit 106da8c): rows are
+// [baseline, strict·easy-only, loose·easy-only, strict·easy+hard, loose·easy+hard] — note the
+// display order pairs the two easy-only conditions and the two easy+hard conditions.
+const FIELD_CONDITIONS = [
+  { label: 'baseline', single: true },
+  { label: 'strict easy-only' },
+  { label: 'loose easy-only' },
+  { label: 'strict easy+hard' },
+  { label: 'loose easy+hard' },
+]
+
+const TASK_B_FIELDS: Array<{ field: string; cells: Cell[] }> = [
+  {
+    field: 'company',
+    cells: [
+      { mean: 100.0 },
+      { mean: 100.0, std: 0.0 },
+      { mean: 100.0, std: 0.0 },
+      { mean: 100.0, std: 0.0 },
+      { mean: 100.0, std: 0.0 },
+    ],
+  },
+  {
+    field: 'founders',
+    cells: [
+      { mean: 63.0 },
+      { mean: 70.7, std: 2.9 },
+      { mean: 68.0, std: 1.7 },
+      { mean: 96.0, std: 0.0 },
+      { mean: 97.3, std: 1.5 },
+    ],
+  },
+  {
+    field: 'valuation',
+    cells: [
+      { mean: 59.0 },
+      { mean: 60.7, std: 0.6 },
+      { mean: 61.3, std: 2.3 },
+      { mean: 83.0, std: 1.7 },
+      { mean: 79.7, std: 1.2 },
+    ],
+  },
+  {
+    field: 'round',
+    cells: [
+      { mean: 46.0 },
+      { mean: 45.7, std: 0.6 },
+      { mean: 45.3, std: 0.6 },
+      { mean: 64.3, std: 5.5 },
+      { mean: 65.7, std: 4.9 },
+    ],
+  },
+  {
+    field: 'raise',
+    cells: [
+      { mean: 43.0 },
+      { mean: 41.7, std: 0.6 },
+      { mean: 42.3, std: 0.6 },
+      { mean: 63.3, std: 5.7 },
+      { mean: 64.0, std: 4.4 },
+    ],
+  },
+]
+
+// bar style per condition: easy-only pair in the muted family, easy+hard pair in the link family
+const FIELD_BAR: Array<{ fill: string; opacity?: number }> = [
+  { fill: 'none' }, // baseline: dashed FG outline
+  { fill: MUTED },
+  { fill: MUTED, opacity: 0.45 },
+  { fill: LINK },
+  { fill: LINK, opacity: 0.45 },
+]
+
+export function TaskBFieldsFigure() {
+  const PLOT_TOP6 = 64
+  const PLOT_BOTTOM6 = 264
+  const y6 = (v: number) => PLOT_BOTTOM6 - v * 2
+  const groupW = (PLOT_RIGHT - PLOT_LEFT) / TASK_B_FIELDS.length
+  const barW = 11
+  const gap = 2
+  const packW = barW * 5 + gap * 4
+  const legendRows: Array<Array<{ i: number; x: number }>> = [
+    [
+      { i: 0, x: 73 },
+      { i: 1, x: 156 },
+      { i: 2, x: 294 },
+    ],
+    [
+      { i: 3, x: 156 },
+      { i: 4, x: 294 },
+    ],
+  ]
+  return (
+    <Fig
+      title="Task B per-field scores on the hard band. Each field shows the baseline and the four trained conditions."
+      caption="This is a per-field diagnostic breakdown, not the headline. The Task B headline is the all-5-exact rate. These are greedy single-decode scores, not pass@k. Bars are the mean of 3 seeds. Whiskers show ±1 sample standard deviation with ddof=1. The baseline is a single untrained run shown as a dashed bar with no whisker."
+    >
+      <svg
+        viewBox="0 0 420 296"
+        width="100%"
+        style={{ height: 'auto', display: 'block' }}
+        role="img"
+        aria-label="Grouped bar chart of Task B per-field strict percentages on the hard band. Company: baseline 100.0, all four trained conditions 100.0. Founders: baseline 63.0, strict easy-only 70.7, loose easy-only 68.0, strict easy plus hard 96.0, loose easy plus hard 97.3. Valuation: baseline 59.0, strict easy-only 60.7, loose easy-only 61.3, strict easy plus hard 83.0, loose easy plus hard 79.7. Round: baseline 46.0, strict easy-only 45.7, loose easy-only 45.3, strict easy plus hard 64.3, loose easy plus hard 65.7. Raise: baseline 43.0, strict easy-only 41.7, loose easy-only 42.3, strict easy plus hard 63.3, loose easy plus hard 64.0."
+      >
+        <text x={2} y={16} fontFamily={MONO} fontSize={12} fill={MUTED}>
+          per-field strict %
+        </text>
+        {legendRows.map((row, r) => (
+          <g key={r} fontFamily={MONO} fontSize={11.5} fill={MUTED}>
+            {row.map(({ i, x }) => (
+              <g key={i}>
+                {FIELD_CONDITIONS[i].single ? (
+                  <rect
+                    x={x}
+                    y={21 + r * 16}
+                    width={11}
+                    height={11}
+                    fill="none"
+                    stroke={FG}
+                    strokeWidth={1.3}
+                    strokeDasharray="3 2"
+                  />
+                ) : (
+                  <rect
+                    x={x}
+                    y={21 + r * 16}
+                    width={11}
+                    height={11}
+                    fill={FIELD_BAR[i].fill}
+                    fillOpacity={FIELD_BAR[i].opacity}
+                  />
+                )}
+                <text x={x + 16} y={30 + r * 16}>{FIELD_CONDITIONS[i].label}</text>
+              </g>
+            ))}
+          </g>
+        ))}
+
+        {[0, 25, 50, 75, 100].map((v) => (
+          <g key={v}>
+            <line x1={PLOT_LEFT} y1={y6(v)} x2={PLOT_RIGHT} y2={y6(v)} stroke={BORDER} strokeWidth={1} />
+            <text
+              x={PLOT_LEFT - 5}
+              y={y6(v) + 4}
+              fontFamily={MONO}
+              fontSize={11}
+              fill={MUTED}
+              textAnchor="end"
+            >
+              {v}
+            </text>
+          </g>
+        ))}
+
+        {TASK_B_FIELDS.map((f, i) => {
+          const x0 = PLOT_LEFT + i * groupW + (groupW - packW) / 2
+          return (
+            <g key={f.field}>
+              {f.cells.map((cell, j) => {
+                const x = x0 + j * (barW + gap)
+                const top = y6(cell.mean)
+                const single = FIELD_CONDITIONS[j].single
+                const hasStd = !single && cell.std !== undefined && cell.std > 0
+                const capTop = hasStd ? y6(cell.mean + (cell.std as number)) : top
+                return (
+                  <g key={j}>
+                    {single ? (
+                      <rect
+                        x={x}
+                        y={top}
+                        width={barW}
+                        height={PLOT_BOTTOM6 - top}
+                        fill="none"
+                        stroke={FG}
+                        strokeWidth={1.3}
+                        strokeDasharray="3 2"
+                      />
+                    ) : (
+                      <rect
+                        x={x}
+                        y={top}
+                        width={barW}
+                        height={PLOT_BOTTOM6 - top}
+                        fill={FIELD_BAR[j].fill}
+                        fillOpacity={FIELD_BAR[j].opacity}
+                      />
+                    )}
+                    {hasStd && (
+                      <g stroke={FG} strokeWidth={1.1} opacity={0.85}>
+                        <line
+                          x1={x + barW / 2}
+                          y1={y6(cell.mean - (cell.std as number))}
+                          x2={x + barW / 2}
+                          y2={capTop}
+                        />
+                        <line x1={x + barW / 2 - 3} y1={capTop} x2={x + barW / 2 + 3} y2={capTop} />
+                        <line
+                          x1={x + barW / 2 - 3}
+                          y1={y6(cell.mean - (cell.std as number))}
+                          x2={x + barW / 2 + 3}
+                          y2={y6(cell.mean - (cell.std as number))}
+                        />
+                      </g>
+                    )}
+                  </g>
+                )
+              })}
+              <text
+                x={PLOT_LEFT + i * groupW + groupW / 2}
+                y={PLOT_BOTTOM6 + 18}
+                fontFamily={MONO}
+                fontSize={12.5}
+                fill={FG}
+                textAnchor="middle"
+              >
+                {f.field}
+              </text>
+            </g>
+          )
+        })}
+
+        <line x1={PLOT_LEFT} y1={PLOT_BOTTOM6} x2={PLOT_RIGHT} y2={PLOT_BOTTOM6} stroke={MUTED} strokeWidth={1} />
+      </svg>
+    </Fig>
+  )
+}
+
 // ---------- V1 ----------
 
 function Box({
