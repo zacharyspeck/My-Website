@@ -27,3 +27,19 @@ Files touched (complete list):
 - `app/writing/the-bottleneck-to-the-bottleneck/figures.tsx` (new)
 - `app/page.tsx` (footer socials row only: added GitHub)
 - `implementation-notes.md` (this file)
+
+---
+
+# Polish pass (branch polish-writing)
+
+1. **List markers restored via CSS, not page.mdx.** The MDX already contained proper `-` and `1.` lists; Tailwind's base reset (`list-style: none`) was hiding the markers on all essay pages. Added `.prose-content ul { list-style: disc }` and `.prose-content ol { list-style: decimal }` to `app/globals.css`. Prose untouched; verbatim check re-run: PASS. Side effect (in scope, site-wide writing polish): the numbered list in "Where Sunlight Pays" gets its visible numbers back too.
+
+2. **Writing column widened 660px → 760px** via a new `maxWidth.reading` token used only by `app/writing/layout.tsx`. Homepage stays at 660px. Below 760px the column is fluid (max-width only), so phones are unaffected.
+
+3. **Em dashes removed from figure titles/captions** in `figures.tsx`, replaced with period/comma/semicolon per instruction. The pass@k title's required phrase "best-of-4, k=4; all-5-exact for Task B; on the 100 hard-band items" is intact (its leading em dash became a semicolon). Three em dashes remain in code comments only — never rendered.
+
+4. **Legend clipping fixed layout-only**: legend swatches/text moved from x=252/268/344/360 to x=230/246/326/342 inside the same 420-unit viewBox ("hard band" previously overran the right edge in the site's mono font). Verified: all 30 value labels in the built page still exactly match the locked data; bar geometry unchanged.
+
+5. **Prime Intellect environment links**: two placements built and screenshotted for approval; NOT committed pending Zach's choice.
+
+Polish files touched: `app/globals.css`, `tailwind.config.ts`, `app/writing/layout.tsx`, `app/writing/the-bottleneck-to-the-bottleneck/figures.tsx`, `implementation-notes.md`.

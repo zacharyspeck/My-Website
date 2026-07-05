@@ -29,6 +29,7 @@ const config: Config = {
       },
       maxWidth: {
         content: '660px',
+        reading: '760px',
       },
     },
   },

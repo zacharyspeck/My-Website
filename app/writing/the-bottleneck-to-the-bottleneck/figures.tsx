@@ -128,10 +128,10 @@ function BarChart({
         {unitLabel}
       </text>
       <g fontFamily={MONO} fontSize={12} fill={MUTED}>
-        <rect x={252} y={6} width={11} height={11} fill={LINK} />
-        <text x={268} y={16}>{legendA}</text>
-        <rect x={344} y={6} width={11} height={11} fill={FG} />
-        <text x={360} y={16}>{legendB}</text>
+        <rect x={230} y={6} width={11} height={11} fill={LINK} />
+        <text x={246} y={16}>{legendA}</text>
+        <rect x={326} y={6} width={11} height={11} fill={FG} />
+        <text x={342} y={16}>{legendB}</text>
       </g>
 
       {/* gridlines */}
@@ -247,10 +247,10 @@ const SEED_NOTE =
 export function TaskAResultsFigure() {
   return (
     <Fig
-      title="Task A (deal-math) — sealed-exam score by training condition"
+      title="Task A (deal-math). Sealed-exam score by training condition"
       caption={
         <>
-          {SEED_NOTE} The hard band stays flat in every condition — Task A&apos;s hard questions sit
+          {SEED_NOTE} The hard band stays flat in every condition. Task A&apos;s hard questions sit
           above the model&apos;s learnable frontier.
         </>
       }
@@ -271,11 +271,11 @@ export function TaskAResultsFigure() {
 export function TaskBResultsFigure() {
   return (
     <Fig
-      title="Task B (deal-extraction) — sealed-exam score by training condition"
+      title="Task B (deal-extraction). Sealed-exam score by training condition"
       caption={
         <>
           {SEED_NOTE} Metric: all-5-exact %. The hard band jumps only when hard questions enter
-          training — and strict vs. loose grading barely changes it.
+          training, and strict vs. loose grading barely changes it.
         </>
       }
     >
@@ -295,11 +295,11 @@ export function TaskBResultsFigure() {
 export function PassAtKFigure() {
   return (
     <Fig
-      title="pass@k — best-of-4, k=4; all-5-exact for Task B; on the 100 hard-band items"
+      title="pass@k; best-of-4, k=4; all-5-exact for Task B; on the 100 hard-band items"
       caption={
         <>
           {SEED_NOTE} Task A stays in the mid-to-high teens everywhere; Task B moves only when hard
-          questions enter training. pass@1 and pass@4 rise together where the skill is reachable —
+          questions enter training. pass@1 and pass@4 rise together where the skill is reachable;
           no diversity collapse.
         </>
       }
@@ -392,8 +392,8 @@ function HArrow({ y, x1, x2 }: { y: number; x1: number; x2: number }) {
 export function LandscapeFigure() {
   return (
     <Fig
-      title="The lay of the land — machine learning's subdivisions, and where RLVR sits"
-      caption="Top: the three classic subdivisions of machine learning. Bottom: the frontier-model training pipeline — pre-training, then the post-training chain (SFT, then RLHF/RLAIF, then RLVR), with RL environment companies supplying the environments RLVR trains in."
+      title="The lay of the land. Machine learning's subdivisions, and where RLVR sits"
+      caption="Top: the three classic subdivisions of machine learning. Bottom: the frontier-model training pipeline; pre-training, then the post-training chain (SFT, then RLHF/RLAIF, then RLVR), with RL environment companies supplying the environments RLVR trains in."
     >
       <svg
         viewBox="0 0 420 496"
@@ -451,8 +451,8 @@ export function StudyDesignFigure() {
   ]
   return (
     <Fig
-      title="Study design — one model, four training recipes, one sealed exam"
-      caption="4 students, 4 homeworks, same exam. The same base model is copied 4 times and trained 4 ways — reward dial (loose / strict) × task dial (easy-only / easy+hard), 3 seeds each — then every student takes the same sealed out-of-distribution final exam."
+      title="Study design. One model, four training recipes, one sealed exam"
+      caption="4 students, 4 homeworks, same exam. The same base model is copied 4 times and trained 4 ways. Reward dial (loose / strict) × task dial (easy-only / easy+hard), 3 seeds each; then every student takes the same sealed out-of-distribution final exam."
     >
       <svg
         viewBox="0 0 420 400"

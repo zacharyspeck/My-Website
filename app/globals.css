@@ -69,6 +69,15 @@ a:hover {
   margin-bottom: 1.4rem;
 }
 
+/* Tailwind's base reset strips list markers; restore them for essay lists */
+.prose-content ul {
+  list-style: disc;
+}
+
+.prose-content ol {
+  list-style: decimal;
+}
+
 .prose-content li {
   margin-bottom: 0.4rem;
 }
