@@ -40,6 +40,6 @@ Files touched (complete list):
 
 4. **Legend clipping fixed layout-only**: legend swatches/text moved from x=252/268/344/360 to x=230/246/326/342 inside the same 420-unit viewBox ("hard band" previously overran the right edge in the site's mono font). Verified: all 30 value labels in the built page still exactly match the locked data; bar geometry unchanged.
 
-5. **Prime Intellect environment links**: two placements built and screenshotted for approval; NOT committed pending Zach's choice.
+5. **Prime Intellect environment links**: Zach chose option (a) — a small muted mono line under the byline, above the divider: "Published environments: vc-deal-math · vc-deal-extraction", both opening in new tabs. The inline parenthetical (option b) was rejected; prose untouched. Both URLs verified resolving (HTTP 200). The verbatim check now explicitly excludes this one approved line.
 
 Polish files touched: `app/globals.css`, `tailwind.config.ts`, `app/writing/layout.tsx`, `app/writing/the-bottleneck-to-the-bottleneck/figures.tsx`, `implementation-notes.md`.
