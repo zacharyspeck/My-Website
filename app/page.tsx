@@ -221,6 +221,14 @@ export default function Home() {
             Substack
           </a>
           {' · '}
+          <a
+            href="https://github.com/zacharyspeck"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+          {' · '}
           <a href="mailto:zdspeck@asu.edu">Email</a>
         </p>
         <p className="text-muted text-xs mt-2">All views my own.</p>
