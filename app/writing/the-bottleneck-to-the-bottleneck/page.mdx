@@ -8,7 +8,7 @@ export const metadata = {
   description: 'A study analyzing RLVR inputs: four copies of a small model trained under loose/strict grading and easy-only/easy+hard questions, then scored on one sealed exam.',
 }
 
-import { LandscapeFigure, StudyDesignFigure, TaskAResultsFigure, TaskBResultsFigure, PassAtKFigure } from './figures'
+import { LandscapeFigure, StudyDesignFigure, TaskAResultsFigure, TaskBResultsFigure, TaskBFieldsFigure, PassAtKFigure } from './figures'
 
 # The Bottleneck to the Bottleneck: A Study Analyzing RLVR Inputs
 
@@ -104,6 +104,8 @@ Let’s focus on one task at a time, starting with Task A. Unsurprisingly, the b
 <TaskBResultsFigure />
 
 Looking at Task B, the untrained baseline score is meaningfully higher given how simple extraction is, which helped make the natural ceiling more eye-popping in the easy band. The single most interesting finding lies in the Task B dataset. Hard homework moved the strict grading setting from 19.0 to 59.3, and the loose grading setting from 17.3 to 58.3. There was the answer I was looking for: *question difficulty had more leverage when analyzing strict correctness in my study*. This is likely because question difficulty is the only lever that actually lets the model practice a hard skill, whereas stricter grading doesn’t infuse new knowledge in the agent. Therefore, a preliminary conclusion is that adjusting task difficulty may carry more leverage in the post-training process when problems are set at the learnable frontier. The reward dial also proved to be null in Task B, consistent with my findings in Task A.
+
+<TaskBFieldsFigure />
 
 As I previously touched on, I measured two other KPIs as a sort of bulletproof vest to make sure the nightmarish pass@1 up pass@k scenario wasn’t behind the curtains. Format-validity came in across the board at 100%, meaning the model answered the problem in correct format every single time. This rules out reward hacking in the form of optimizing for format while having the wrong answer, although I guess that would be quite peculiar in such a study as this. The other, more critical KPI that I measured was pass@k, which measures this: in k tries on the 100 questions in this exam, how many questions would it get right if there were multiple attempts per question? Headline strict correctness assumes only pass@1, meaning that the model only gets one attempt per question. The reason pass@1 up and pass@k down is so hellish is because it means the model gets really good at nailing one lucky answer, but when digging past the surface it means its cross-functional intelligence is decreasing and answer range narrowing given because it is gaming towards that one specific answer. The result?
 
