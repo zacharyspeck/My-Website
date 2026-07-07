@@ -108,12 +108,6 @@ export default function Home() {
             </a>{' '}
             at ASU
           </li>
-          <li>
-            Supporting founders at the{' '}
-            <a href="https://www.azmicrocredit.org/" target="_blank" rel="noopener noreferrer">
-              Arizona Microcredit Initiative
-            </a>
-          </li>
         </ul>
       </section>
 
