@@ -65,6 +65,14 @@ export default function Home() {
       href: '/veeva-systems-long.pdf',
       isExternal: true,
     },
+    {
+      key: 'green-room',
+      title: 'The Green Room',
+      date: 'May 31, 2026',
+      isoDate: '2026-05-31',
+      href: 'https://thegreenroomfm.vercel.app/',
+      isExternal: true,
+    },
   ].sort((a, b) => b.isoDate.localeCompare(a.isoDate))
 
   return (
@@ -111,9 +119,9 @@ export default function Home() {
         </ul>
       </section>
 
-      {/* Writing */}
+      {/* Work */}
       <section className="mt-16">
-        <h2 className="font-mono text-xs text-muted uppercase tracking-widest mb-5">Writing</h2>
+        <h2 className="font-mono text-xs text-muted uppercase tracking-widest mb-5">Work</h2>
         <ul className="list-none p-0 m-0 space-y-3">
           {allWriting.map((item) => (
             <li key={item.key} className="flex items-baseline gap-3 flex-wrap">
@@ -127,19 +135,6 @@ export default function Home() {
               <span className="text-muted text-sm">{item.date}</span>
             </li>
           ))}
-        </ul>
-      </section>
-
-      {/* Projects */}
-      <section className="mt-16">
-        <h2 className="font-mono text-xs text-muted uppercase tracking-widest mb-5">Projects</h2>
-        <ul className="list-none p-0 m-0 space-y-2">
-          <li>
-            <a href="https://thegreenroomfm.vercel.app/" target="_blank" rel="noopener noreferrer">
-              The Green Room
-            </a>
-            , a concert finder I built
-          </li>
         </ul>
       </section>
 
