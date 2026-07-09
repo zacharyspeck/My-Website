@@ -74,7 +74,7 @@ export default function Home() {
       <section>
         <h1 className="font-serif text-3xl font-normal mb-5 text-fg">Zachary Speck</h1>
         <p>
-          My name is Zach. I love technology, finance, and the space where the two meet. Right now I&apos;m reading, learning, and meeting as many people as I can, because life is too short not to spend it making an impact on the world.
+          My name is Zach. I think life is too short not to pursue your north star no matter how gargantuan it may seem, even if you have to start from complete scratch. If everyone thinks you&apos;re delusional in the process, I believe you have to be the one to simply say &ldquo;yes, you&apos;re all wrong.&rdquo; This fundamental belief of mine underlies everything I do.
         </p>
       </section>
 
