@@ -58,6 +58,14 @@ export default function Home() {
       href: `/writing/${p.slug}/`,
     })),
     {
+      key: 'warmline',
+      title: 'Warmline',
+      date: 'July 9, 2026 (built at the YC AI Growth Hackathon)',
+      isoDate: '2026-07-09',
+      href: 'https://warmline-six.vercel.app/',
+      isExternal: true,
+    },
+    {
       key: 'veeva-long',
       title: 'Veeva Systems (NYSE: VEEV), Long',
       date: 'April 15, 2026',
