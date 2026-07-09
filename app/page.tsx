@@ -9,6 +9,7 @@ type WritingItem = {
   isoDate: string
   href: string
   isExternal?: boolean
+  titleNote?: string
 }
 
 const CONCERTS = [
@@ -60,7 +61,8 @@ export default function Home() {
     {
       key: 'warmline',
       title: 'Warmline',
-      date: 'July 9, 2026 (built at the YC AI Growth Hackathon)',
+      titleNote: '(built at the YC AI Growth Hackathon)',
+      date: 'July 9, 2026',
       isoDate: '2026-07-09',
       href: 'https://warmline-six.vercel.app/',
       isExternal: true,
@@ -140,6 +142,7 @@ export default function Home() {
               >
                 {item.title}
               </a>
+              {item.titleNote && <span>{item.titleNote}</span>}
               <span className="text-muted text-sm">{item.date}</span>
             </li>
           ))}
