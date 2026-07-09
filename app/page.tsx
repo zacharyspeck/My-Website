@@ -133,8 +133,8 @@ export default function Home() {
       <section className="mt-16">
         <h2 className="font-mono text-xs text-muted uppercase tracking-widest mb-5">Work</h2>
         <ul className="list-none p-0 m-0 space-y-3">
-          {allWriting.map((item) => (
-            <li key={item.key} className="flex items-baseline gap-3 flex-wrap">
+          {allWriting.map((item) => {
+            const titleLink = (
               <a
                 href={item.href}
                 target={item.isExternal ? '_blank' : undefined}
@@ -142,10 +142,20 @@ export default function Home() {
               >
                 {item.title}
               </a>
-              {item.titleNote && <span>{item.titleNote}</span>}
-              <span className="text-muted text-sm">{item.date}</span>
-            </li>
-          ))}
+            )
+            return (
+              <li key={item.key} className="flex items-baseline gap-3 flex-wrap">
+                {item.titleNote ? (
+                  <span>
+                    {titleLink} <span>{item.titleNote}</span>
+                  </span>
+                ) : (
+                  titleLink
+                )}
+                <span className="text-muted text-sm">{item.date}</span>
+              </li>
+            )
+          })}
         </ul>
       </section>
 
