@@ -12,7 +12,7 @@ const mono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: 'Zachary Speck',
   description:
-    'Zachary Speck — technology, finance, and the space where the two meet. Reading, building, and meeting as many people as possible.',
+    'Zachary Speck — reading, building, and meeting as many people as I can, chasing a north star no matter how gargantuan it seems.',
   metadataBase: new URL('https://zacharyspeck.com'),
   icons: {
     icon: [
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Zachary Speck',
-    description: 'Zachary Speck — technology, finance, and the space where the two meet.',
+    description: 'Zachary Speck — chasing a north star, no matter how gargantuan.',
     url: 'https://zacharyspeck.com',
     type: 'website',
     images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Zachary Speck' }],
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Zachary Speck',
-    description: 'Zachary Speck — technology, finance, and the space where the two meet.',
+    description: 'Zachary Speck — chasing a north star, no matter how gargantuan.',
     images: ['/og-image.png'],
   },
 }
